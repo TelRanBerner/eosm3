@@ -42,7 +42,7 @@ const App: React.FC = () => {
         try {
             await Promise.race([
                 api.post('/auth/logout'),
-                new Promise((_, reject) => setTimeout(() => reject('timeout'), 3000))
+                new Promise((_, reject) => setTimeout(() => reject('timeout'), 1000))
             ]);
         } catch {}
         setUser(null);
