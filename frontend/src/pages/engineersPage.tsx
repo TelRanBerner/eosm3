@@ -50,7 +50,7 @@ interface EngineerPageProps {
     logout: () => Promise<void>;
 }
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://eosm3-production-1bb1.up.railway.app';
 
 const getStatusStyles = (status: string) => {
     const s = status?.toLowerCase() || '';
@@ -98,7 +98,7 @@ const SendMsgDialog: React.FC<SendMsgDialogProps> = ({ open, onClose, onSent, ti
         const txt = text.trim();
         if (!txt) return;
         try {
-            await axios.post('http://localhost:3000/api/messages', { to, text: txt }, { withCredentials: true });
+            await axios.post(`${BASE_URL}/api/messages`, { to, text: txt }, { withCredentials: true });
             onSent(`Message sent to ${title}!`);
             setText('');
             onClose();
@@ -157,7 +157,6 @@ const EngineerPage: React.FC<EngineerPageProps> = ({ logout }) => {
     const [openSupportDialog, setOpenSupportDialog] = useState(false);
     const [openAdminDialog, setOpenAdminDialog] = useState(false);
 
-
     const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' as 'success' | 'error' });
 
     const showMessage = (msg: string, sev: 'success' | 'error' = 'success') =>
@@ -183,7 +182,7 @@ const EngineerPage: React.FC<EngineerPageProps> = ({ logout }) => {
     // ── Messenger — useCallback prevents re-creation on every render ──
     const fetchMessages = useCallback(async () => {
         try {
-            const res = await axios.get('http://localhost:3000/api/messages/inbox', { withCredentials: true });
+            const res = await axios.get(`${BASE_URL}/api/messages/inbox`, { withCredentials: true });
             const msgs = Array.isArray(res.data) ? res.data : [];
             setInbox(msgs);
             setUnreadCount(msgs.filter((m: any) => !m.read).length);
@@ -192,12 +191,12 @@ const EngineerPage: React.FC<EngineerPageProps> = ({ logout }) => {
 
     const handleOpenInbox = useCallback(async () => {
         try {
-            const res = await axios.get('http://localhost:3000/api/messages/inbox', { withCredentials: true });
+            const res = await axios.get(`${BASE_URL}/api/messages/inbox`, { withCredentials: true });
             const msgs = Array.isArray(res.data) ? res.data : [];
             // mark all as read
             msgs.forEach(async (m: any) => {
                 if (!m.read) {
-                    try { await axios.patch(`http://localhost:3000/api/messages/${m._id}/read`, {}, { withCredentials: true }); } catch {}
+                    try { await axios.patch(`${BASE_URL}/api/messages/${m._id}/read`, {}, { withCredentials: true }); } catch {}
                 }
             });
             setInbox(msgs.map((m: any) => ({ ...m, read: true })));
@@ -254,10 +253,6 @@ const EngineerPage: React.FC<EngineerPageProps> = ({ logout }) => {
         } catch { showMessage('Failed to delete incident', 'error'); }
     };
 
-
-
-
-
     const filteredTasks = React.useMemo(() =>
             tasks.filter(task =>
                 (task.location ?? '').toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -265,8 +260,6 @@ const EngineerPage: React.FC<EngineerPageProps> = ({ logout }) => {
                 (task.title ?? '').toLowerCase().includes(searchTerm.toLowerCase())
             ),
         [tasks, searchTerm]);
-
-
 
     return (
         <Box sx={{ bgcolor: '#fafafa', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
