@@ -39,7 +39,12 @@ const App: React.FC = () => {
     useEffect(() => { fetchCurrentUser(); }, []);
 
     const logout = async () => {
-        try { await api.post('/auth/logout'); } catch {}
+        try {
+            await Promise.race([
+                api.post('/auth/logout'),
+                new Promise((_, reject) => setTimeout(() => reject('timeout'), 3000))
+            ]);
+        } catch {}
         setUser(null);
     };
 
