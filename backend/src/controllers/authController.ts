@@ -20,7 +20,7 @@ const getCookieOptions = () => {
   return {
     httpOnly: true,
     secure: isProd,
-    sameSite: 'strict' as const,
+    sameSite: isProd ? 'none' as const : 'strict' as const,
     path: '/',
   };
 };
