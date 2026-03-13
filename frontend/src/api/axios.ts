@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:3000/api',
-    withCredentials: true, // заставляет браузер посылать куки авторизованного юзера
+    baseURL: 'https://eosm3-production.up.railway.app/api',
+    withCredentials: true,
 });
 
 export default api;
