@@ -106,7 +106,7 @@ const UserPage: React.FC<UserPageProps> = ({ logout }) => {
 
     const listItemStyle = {
         flexDirection: 'column', alignItems: 'flex-start', mb: 2, cursor: 'pointer', transition: 'all 0.3s ease',
-        '&:hover': { transform: 'translateX(5px)', '& .MuiTypography-subtitle2': { color: '#f5a623' } }
+        '&:hover': { transform: 'translateX(5px)', '& .MuiTypography-subtitle1': { color: '#f5a623' } }
     };
 
     return (
@@ -140,12 +140,12 @@ const UserPage: React.FC<UserPageProps> = ({ logout }) => {
                                 </Stack>
                                 <Stack spacing={0.2}>
                                     <Stack direction="row" alignItems="center" spacing={0.5} sx={{ color: '#2b4d7e', opacity: 0.8 }}>
-                                        <LocationIcon sx={{ fontSize: 13 }} />
-                                        <Typography variant="caption" fontWeight="bold">{profile.address}</Typography>
+                                        <LocationIcon sx={{ fontSize: 16 }} />
+                                        <Typography variant="body2" fontWeight="bold">{profile.address}</Typography>
                                     </Stack>
                                     <Stack direction="row" alignItems="center" spacing={0.5} sx={{ color: '#2b4d7e', opacity: 0.8 }}>
-                                        <PhoneIcon sx={{ fontSize: 13 }} />
-                                        <Typography variant="caption" fontWeight="bold">{profile.phone}</Typography>
+                                        <PhoneIcon sx={{ fontSize: 16 }} />
+                                        <Typography variant="body2" fontWeight="bold">{profile.phone}</Typography>
                                     </Stack>
                                 </Stack>
                             </Box>
@@ -189,8 +189,8 @@ const UserPage: React.FC<UserPageProps> = ({ logout }) => {
                                         ].map((mail, i) => (
                                             <React.Fragment key={i}>
                                                 <ListItem disableGutters sx={listItemStyle as any} onClick={() => setSelectedMail({ title: mail.t, message: mail.m })}>
-                                                    <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>{mail.t}</Typography>
-                                                    <Typography sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', mt: 0.5, display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{mail.m}</Typography>
+                                                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{mail.t}</Typography>
+                                                    <Typography sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', mt: 0.5, display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{mail.m}</Typography>
                                                 </ListItem>
                                                 {i < 7 && <Divider sx={{ bgcolor: 'rgba(255,255,255,0.15)', mb: 2 }} />}
                                             </React.Fragment>
@@ -280,7 +280,7 @@ const UserPage: React.FC<UserPageProps> = ({ logout }) => {
                 {/* Sidebar — desktop only */}
                 {!isMobile && (
                     <Box sx={{ width: '200px', flexShrink: 0, bgcolor: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)', borderLeft: '1px solid rgba(43,77,126,0.1)', p: 2, overflowY: 'auto' }}>
-                        <Typography variant="subtitle2" sx={{ color: '#2b4d7e', fontWeight: 900, mb: 3, borderBottom: '2px solid #f5a623', pb: 1, letterSpacing: 0.5, mt: 1 }}>
+                        <Typography variant="subtitle1" sx={{ color: '#2b4d7e', fontWeight: 900, mb: 3, borderBottom: '2px solid #f5a623', pb: 1, letterSpacing: 0.5, mt: 1 }}>
                             CITY DIRECTORY
                         </Typography>
                         <List disablePadding>
@@ -295,11 +295,11 @@ const UserPage: React.FC<UserPageProps> = ({ logout }) => {
                                 <ListItem key={idx} sx={{ mb: 0.5, px: 1, borderRadius: 0, cursor: 'pointer', transition: '0.2s',
                                     '&:hover': { bgcolor: 'rgba(43,77,126,0.08)', transform: 'translateX(5px)', '& .MuiListItemIcon-root': { color: '#f5a623' } } }}>
                                     <ListItemIcon sx={{ minWidth: 30, color: '#2b4d7e' }}>
-                                        {React.isValidElement(item.i) ? React.cloneElement(item.i as React.ReactElement<any>, { sx: { fontSize: 18 } }) : item.i}
+                                        {React.isValidElement(item.i) ? React.cloneElement(item.i as React.ReactElement<any>, { sx: { fontSize: 20 } }) : item.i}
                                     </ListItemIcon>
                                     <ListItemText primary={item.t} secondary={item.s}
-                                                  primaryTypographyProps={{ fontWeight: 800, fontSize: '0.75rem', color: '#2b4d7e' }}
-                                                  secondaryTypographyProps={{ fontSize: '0.6rem' }} />
+                                                  primaryTypographyProps={{ fontWeight: 800, fontSize: '1rem', color: '#2b4d7e' }}
+                                                  secondaryTypographyProps={{ fontSize: '0.8rem' }} />
                                 </ListItem>
                             ))}
                         </List>
