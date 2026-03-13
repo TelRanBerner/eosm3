@@ -103,7 +103,7 @@ const AdminPage: React.FC<AdminPageProps> = ({ logout }) => {
     const handleSendMessage = async () => {
         if (!recipient || !message.trim()) return;
         try {
-            await axios.post('http://localhost:3000/api/messages', { to: recipient, text: message }, { withCredentials: true });
+            await axios.post('https://eosm3-production-1bb1.up.railway.app', { to: recipient, text: message }, { withCredentials: true });
             showMessage(`Message sent to ${recipient}!`);
             setMessage('');
         } catch { showMessage('Failed to send message', 'error'); }
